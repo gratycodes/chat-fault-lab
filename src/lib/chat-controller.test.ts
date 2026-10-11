@@ -118,6 +118,7 @@ describe('ChatController', () => {
     const s = c.getSnapshot();
     expect(s.status).toBe('interrupted');
     expect(last(s).content.length).toBeGreaterThan(10);
+    expect(s.log.some((l) => l.kind === 'end' && l.detail.includes('gave up'))).toBe(true);
   });
 
   it('runs a streamed tool call and streams the answer', async () => {

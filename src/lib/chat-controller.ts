@@ -483,8 +483,10 @@ export class ChatController {
           }
           // Before the first token the server may legitimately think for a while; allow 3x.
           idleTimer = setTimeout(() => {
-            void reader.cancel('idle timeout').catch(() => {});
+            // Settle the race before cancelling: cancel() also resolves the
+            // pending read() with done=true, which would look like a clean end.
             resolve('timeout');
+            void reader.cancel('idle timeout').catch(() => {});
           }, this.scaled(this.opts.idleTimeoutMs) * (started ? 1 : 3));
         }),
       ]);
