@@ -5,5 +5,9 @@ import { handleChat } from '@/lib/chat-handler';
 export const dynamic = 'force-dynamic';
 
 export function POST(request: Request): Promise<Response> {
-  return handleChat(request, process.env);
+  return handleChat(request, {
+    OPENAI_API_KEY: process.env.OPENAI_API_KEY,
+    OPENAI_BASE_URL: process.env.OPENAI_BASE_URL,
+    OPENAI_MODEL: process.env.OPENAI_MODEL,
+  });
 }

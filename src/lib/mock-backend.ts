@@ -8,7 +8,7 @@
  */
 import { encodeSseFrame } from './sse';
 import type { ScenarioId } from './scenarios';
-import { convertCurrency, type ConversionResult } from './tools';
+import type { ConversionResult } from './tools';
 
 export interface WireMessage {
   role: 'system' | 'user' | 'assistant' | 'tool';
